@@ -53,13 +53,19 @@ const BossNft = () => {
 								</div>
 								<div className="text-center">
 									<h1 className="color3 fw600">BOSS NFT</h1>
-									<p className="text-white f28">
-										{(boss && boss) || (
-											<div className="w-50 mx-auto">
-												<Loader />
-											</div>
-										)}
-									</p>
+									<a
+										target="blank"
+										href={`https://explorer.solana.com/address/${boss && boss}`}
+										className="text-white f28 text-decoration-none"
+									>
+										<div className="overflow">
+											{(boss && boss) || (
+												<div className="w-50 mx-auto">
+													<Loader />
+												</div>
+											)}
+										</div>
+									</a>
 								</div>
 							</div>
 						</div>

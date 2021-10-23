@@ -97,13 +97,21 @@ const WinnerNft = () => {
 												</div>
 												<div className="text-center">
 													<h4 className="color3 fw600 f22">{prev.n}</h4>
-													<p className="text-white f14">
-														{(post.length && post[i].vip) || (
-															<div className="w-50 mx-auto">
-																<Loader />
-															</div>
-														)}
-													</p>
+													<a
+														target="blank"
+														href={`https://explorer.solana.com/address/${
+															post.length && post[i].vip
+														}`}
+														className="text-white f14 text-decoration-none"
+													>
+														<p className="overflow">
+															{(post.length && post[i].vip) || (
+																<div className="w-50 mx-auto">
+																	<Loader />
+																</div>
+															)}
+														</p>
+													</a>
 												</div>
 											</div>
 										);

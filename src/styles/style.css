@@ -22,6 +22,12 @@ body {
   color: red;
 }
 
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .loading_page {
   position: fixed;
   height: 100vh;

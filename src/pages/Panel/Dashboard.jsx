@@ -429,7 +429,7 @@ const Dashboard = ({ authState, setAuthState }) => {
 									<div key={i} className="col-12 col-md-6 col-lg-4">
 										<h4 className="text-center color3 f20">{prev.t}</h4>
 										<input
-											className="w-100 px-3 text-white"
+											className="w-100 px-3 text-white overflow"
 											type="text"
 											name={prev.n}
 											value={nftState[`${prev.n}`]}
@@ -473,7 +473,7 @@ const Dashboard = ({ authState, setAuthState }) => {
 									<div key={i} className="col-12 col-md-6 col-lg-4">
 										<h4 className="text-center color1 f20">{prev.t}</h4>
 										<input
-											className="w-100 px-3 text-white"
+											className="w-100 px-3 text-white overflow"
 											type="text"
 											name={prev.n}
 											value={nftState2[`${prev.n}`]}
@@ -526,7 +526,7 @@ const Dashboard = ({ authState, setAuthState }) => {
 							<div className="col-12 col-md-6 col-lg-4 mx-auto">
 								<h4 className="text-center color3 mb-3 fw600 f20">Boss NFT</h4>
 								<input
-									className="w-100 px-3 text-white"
+									className="w-100 px-3 text-white overflow"
 									type="text"
 									placeholder={(bossData.length && bossData) || ""}
 									value={boss}
@@ -563,7 +563,7 @@ const Dashboard = ({ authState, setAuthState }) => {
 									The status of the roadmap is now
 								</p>
 								<input
-									className="w-100 px-3 text-white"
+									className="w-100 px-3 text-white overflow"
 									type="number"
 									placeholder={percent || ""}
 									value={roadmap}
