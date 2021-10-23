@@ -32,6 +32,7 @@ const Dashboard = ({ authState, setAuthState }) => {
 	// LOADER
 	const [winnerData, setWinnerData] = useState([]);
 	const [winner, setWinner] = useState();
+	const [winnerSelect, setWinnerSelect] = useState();
 
 	// VIP
 	const [nftState, setNftState] = useState({
@@ -65,6 +66,34 @@ const Dashboard = ({ authState, setAuthState }) => {
 				[name]: value,
 			};
 		});
+	};
+
+	// CHANGE VIP
+	const winnerSelectFunc = () => {
+		if (winnerSelect !== "") {
+			db.collection("piggy-bank")
+				.doc(winnerSelect)
+				.set({
+					solana: winner.trim(),
+				})
+				.then(() => {})
+				.catch((error) => {
+					alert(error.message);
+				});
+		} else {
+			db.collection("boss-nft")
+				.doc("boss-nft")
+				.set({
+					bossNft: winner.trim(),
+				})
+				.then(() => {
+					setActiveLoader(false);
+					setLoader("");
+				})
+				.catch((error) => {
+					alert(error.message);
+				});
+		}
 	};
 
 	// CHANGE PIGGY
@@ -158,10 +187,11 @@ const Dashboard = ({ authState, setAuthState }) => {
 	}, [post]); // empty dependencies array => useEffect only called once
 
 	// RANDOM WINNER GENERATOR
-	const generator = () => {
+	const generator = (data) => {
 		var theRandomNumber;
 		theRandomNumber = Math.floor(Math.random() * winnerData.length) + 0;
 		setWinner(winnerData[theRandomNumber].w);
+		setWinnerSelect();
 	};
 	// RANDOM WINNER GENERATOR
 
@@ -339,7 +369,7 @@ const Dashboard = ({ authState, setAuthState }) => {
 		// return cleanup function
 		return () => subscriber();
 	}, [percent]); // empty dependencies array => useEffect only called once
-	console.log(post);
+
 	return (
 		<>
 			{/* <!-- Modal --> */}
@@ -359,7 +389,11 @@ const Dashboard = ({ authState, setAuthState }) => {
 							</div>
 							<h4 className="text-center mt-4 color1 fw600">Winner is:</h4>
 							<p className="text-center text-white mb-4">{winner}</p>
-							<button className="w-100 themeBtn" data-bs-dismiss="modal">
+							<button
+								onClick={winnerSelectFunc}
+								className="w-100 themeBtn"
+								data-bs-dismiss="modal"
+							>
 								Select
 							</button>
 						</div>
@@ -450,7 +484,10 @@ const Dashboard = ({ authState, setAuthState }) => {
 											onChange={handleChange2}
 										/>
 										<button
-											onClick={generator}
+											onClick={() => {
+												generator();
+												setWinnerSelect(piggy[i].key);
+											}}
 											className="w-100 themeBtn mt-2"
 											data-bs-toggle="modal"
 											data-bs-target="#exampleModal"
@@ -496,7 +533,10 @@ const Dashboard = ({ authState, setAuthState }) => {
 									onChange={(e) => setBoss(e.target.value)}
 								/>
 								<button
-									onClick={generator}
+									onClick={() => {
+										generator();
+										setWinnerSelect("");
+									}}
 									className="w-100 themeBtn mt-2"
 									data-bs-toggle="modal"
 									data-bs-target="#exampleModal"
